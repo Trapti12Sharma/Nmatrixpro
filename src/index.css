@@ -1,0 +1,44 @@
+
+@import "tailwindcss";  /* this pulls all Tailwind utility classes */
+
+/* ✅ External CSS */
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "./styles/animations.css";
+
+/* Global styles */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.text-outline-only {
+  color: transparent;
+  -webkit-text-stroke: 2.5px white;
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 30px 8px rgba(59, 130, 246, 0.6),
+    0 0 60px 16px rgba(59, 130, 246, 0.3);
+  transition: box-shadow 0.6s;
+}
+
+.char {
+  display: inline-block;
+}
+
+.animate-section {
+  opacity: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
