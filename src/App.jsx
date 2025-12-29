@@ -3,7 +3,7 @@ import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 
 /* ===================== HOME ===================== */
-import Home from "./components/pages/home";
+import Home from "./components/pages/Home";
 
 /* ===================== PRODUCTS ===================== */
 
