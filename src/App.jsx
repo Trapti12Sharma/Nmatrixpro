@@ -56,8 +56,8 @@ import HowToTradeMT5 from "./components/pages/trading-platforms/HowToTradeMT5";
 import AlgoTradingMT5 from "./components/pages/trading-platforms/AlgoTradingMT5";
 import AvaSocial from "./components/pages/trading-platforms/AvaSocial";
 import DupliTrade from "./components/pages/trading-platforms/DupliTrade";
-import About from "./components/pages/about";
-import TradingInfo from "./components/pages/trading-info";
+import About from "./components/pages/About";
+import TradingInfo from "./components/pages/Trading-info";
 export default function App() {
   return (
     <BrowserRouter>
