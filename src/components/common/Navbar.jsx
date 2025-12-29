@@ -1,144 +1,307 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { menuData } from "./menuData";
+import { Menu, X, Search } from "lucide-react";
 
 export default function Navbar() {
-  const [openMenu, setOpenMenu] = useState(null);
-  const navRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null); // "products" | "platforms"
 
-  // Close dropdown when clicking outside
+  const productsRef = useRef(null);
+  const platformsRef = useRef(null);
+
+  // ✅ Close menu ONLY when cursor goes BELOW active submenu
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setOpenMenu(null);
+    function handleMouseMove(e) {
+      let ref = null;
+
+      if (activeMenu === "products") ref = productsRef;
+      if (activeMenu === "platforms") ref = platformsRef;
+
+      if (!ref?.current) return;
+
+      const rect = ref.current.getBoundingClientRect();
+
+      if (e.clientY > rect.bottom) {
+        setActiveMenu(null);
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [activeMenu]);
 
   return (
-    <header className="bg-white border-b sticky top-0 z-[9999]" ref={navRef}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
-        {/* Logo */}
-        <Link to="/" className="font-bold text-xl text-blue-700">
-          NMATRIXPRO
-        </Link>
+    <header className="bg-white border-b sticky top-0 z-[9999]">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
+          {/* LOGO */}
+          <Link to="/" className="text-2xl font-bold text-black">
+            NMATRIXPRO
+          </Link>
 
-        {/* Desktop Menu */}
-        <nav className="hidden lg:flex gap-8 text-sm font-medium">
-          {Object.keys(menuData).map((menu) => (
+          {/* DESKTOP NAV */}
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
+            {/* ================= PRODUCTS ================= */}
             <div
-              key={menu}
               className="relative"
-              onMouseEnter={() => setOpenMenu(menu)}
+              onMouseEnter={() => setActiveMenu("products")}
             >
-              <Link
-                to={getTopRoute(menu)}
-                className={`pb-2 inline-block ${
-                  openMenu === menu
-                    ? "text-blue-600 border-b-2 border-blue-600"
-                    : "hover:text-blue-600"
-                }`}
-              >
-                {menu}
-              </Link>
+              <span className="px-4 py-3 cursor-pointer text-blue-600">
+                Products
+              </span>
 
-              {openMenu === menu && (
-                <MegaDropdown menu={menu} data={menuData[menu]} />
+              {activeMenu === "products" && (
+                <div
+                  ref={productsRef}
+                  className="fixed left-0 top-20 w-screen bg-white border-t shadow-lg"
+                >
+                  <div className="max-w-7xl mx-auto px-10 py-10">
+                    <div className="grid grid-cols-5 gap-14 text-sm">
+                      <div>
+                        <p className="font-semibold mb-4">Forex Trading</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/products/forex/what-is-forex">
+                              What is Forex
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/forex/how-to-trade-forex">
+                              How to Trade Forex
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/forex/vanilla-options">
+                              Vanilla Options
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p className="font-semibold mb-4">CFD Trading</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/products/cfd/what-are-cfds">
+                              What are CFDs
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/cfd/how-to-trade-cfds">
+                              How to Trade CFDs
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/cfd/bonds-treasuries">
+                              Bonds & Treasuries
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/cfd/etfs">ETFs Trading</Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p className="font-semibold mb-4">Stock Trading</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/products/stocks/what-are-stocks">
+                              What are Stocks
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/stocks/how-to-trade-stocks">
+                              How to Trade Stocks
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p className="font-semibold mb-4">Commodities</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/products/commodities/how-to-trade-commodities">
+                              How to Trade Commodities
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/commodities/how-to-trade-gold">
+                              How to Trade Gold
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/commodities/how-to-trade-oil">
+                              How to Trade Oil
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p className="font-semibold mb-4">Indices</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/products/indices/what-are-indices">
+                              What Are Indices
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/indices/how-to-trade-indices">
+                              How to Trade Indices
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/products/indices/vix-index">
+                              VIX Index
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
-          ))}
 
-          <Link to="/education" className="hover:text-blue-600">
-            Education
-          </Link>
-          <Link to="/partners" className="hover:text-blue-600">
-            Partners
-          </Link>
-          <Link to="/about" className="hover:text-blue-600">
-            About
-          </Link>
-        </nav>
+            {/* ================= TRADING PLATFORMS ================= */}
+            {/* ================= TRADING PLATFORMS ================= */}
+            <div
+              className="relative"
+              onMouseEnter={() => setActiveMenu("platforms")}
+            >
+              <span className="px-4 py-3 cursor-pointer hover:text-blue-600">
+                Trading Platforms
+              </span>
 
-        {/* CTA */}
-        <div className="hidden lg:flex gap-4">
-          <Link to="/login" className="text-orange-600">
-            Login
-          </Link>
-          <Link to="/register" className="bg-orange-500 text-white px-4 py-2">
-            Register Now
-          </Link>
+              {activeMenu === "platforms" && (
+                <div
+                  ref={platformsRef}
+                  className="fixed left-0 top-20 w-screen bg-white border-t shadow-lg"
+                >
+                  <div className="max-w-7xl mx-auto px-10 py-10">
+                    <div className="grid grid-cols-4 gap-14 text-sm">
+                      {/* WebTrader */}
+                      <div>
+                        <p className="font-semibold mb-4">WebTrader</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/trading-platforms/webtrader">
+                              WebTrader
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/avaoptions">
+                              AvaOptions
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/avatrade-app">
+                              AvaTrade App
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/mac-trading">
+                              Mac Trading
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* MetaTrader 4 */}
+                      <div>
+                        <p className="font-semibold mb-4">MetaTrader 4</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/trading-platforms/what-is-metatrader">
+                              What is MetaTrader
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/guardian-angel">
+                              Guardian Angel
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/expert-advisors">
+                              Expert Advisors
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/vps">VPS</Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* MetaTrader 5 */}
+                      <div>
+                        <p className="font-semibold mb-4">MetaTrader 5</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/trading-platforms/metatrader-5">
+                              MetaTrader 5
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/how-to-trade-mt5">
+                              How to Trade with MT5
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/algorithmic-trading-mt5">
+                              Algorithmic Trading
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Automated Trading */}
+                      <div>
+                        <p className="font-semibold mb-4">Automated Trading</p>
+                        <ul className="space-y-3 text-gray-600">
+                          <li>
+                            <Link to="/trading-platforms/ava-social">
+                              AvaSocial
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/trading-platforms/duplitrade">
+                              DupliTrade
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Link to="/trading-info">Trading Info</Link>
+            <Link to="/about">About</Link>
+          </nav>
+
+          {/* RIGHT */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Search size={18} />
+            <Link to="/login" className="text-orange-600">
+              Login
+            </Link>
+            <Link
+              to="/register"
+              className="bg-orange-500 text-white px-5 py-2 rounded"
+            >
+              Register Now
+            </Link>
+          </div>
+
+          {/* MOBILE */}
+          <button className="lg:hidden" onClick={() => setOpen(!open)}>
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
       </div>
     </header>
   );
-}
-
-/* ───────── Mega Dropdown ───────── */
-function MegaDropdown({ menu, data }) {
-  return (
-    <div className="fixed left-0 right-0 top-[80px] bg-white border-t shadow-xl z-[9999]">
-      <div className="max-w-7xl mx-auto px-10 py-10">
-        {/* SCROLL SAFE CONTAINER */}
-        <div className="max-h-[70vh] overflow-y-auto">
-          {/* RESPONSIVE AUTO GRID */}
-          <div
-            className="grid gap-12 text-sm 
-            grid-cols-1 
-            sm:grid-cols-2 
-            md:grid-cols-3 
-            lg:grid-cols-5"
-          >
-            {data.map((section, index) => (
-              <div key={index}>
-                <h4 className="font-semibold text-gray-900 mb-4">
-                  {section.title}
-                </h4>
-
-                <ul className="space-y-2 text-gray-600">
-                  {section.items.map((item, i) => (
-                    <li key={i} className="hover:text-blue-600 cursor-pointer">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ───────── ROUTE HELPERS ───────── */
-function getTopRoute(menu) {
-  if (menu === "Products") return "/trading/forex";
-  if (menu === "Trading Platforms") return "/platforms/webtrader";
-  if (menu === "Trading Info") return "/trading-info";
-  return "/";
-}
-
-function getItemRoute(menu, section, item) {
-  if (menu === "Products") {
-    if (section.includes("Forex")) return "/trading/forex";
-    if (section.includes("CFD")) return "/trading/cfd";
-    if (section.includes("Stock")) return "/trading/stocks";
-    if (section.includes("Commodities")) return "/trading/commodities";
-    if (section.includes("Indices")) return "/trading/indices";
-    if (section.includes("Futures")) return "/trading/futures";
-  }
-
-  if (menu === "Trading Platforms") {
-    if (item.includes("Web")) return "/platforms/webtrader";
-    if (item.includes("MetaTrader 4")) return "/platforms/mt4";
-    if (item.includes("MetaTrader 5")) return "/platforms/mt5";
-  }
-
-  if (menu === "Trading Info") {
-    return "/trading-info";
-  }
-
-  return "/";
 }

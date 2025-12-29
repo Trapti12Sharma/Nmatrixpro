@@ -1,22 +1,56 @@
-export default function About() {
+import { ShieldCheck, UserCheck, RefreshCw, BarChart3 } from "lucide-react";
+
+import ValuesVisionSection from "../common/ValuesVisionSection";
+import visionImg from "../../assets/vision.png";
+import bgForex from "../../assets/about.png";
+import HeroBanner from "../common/HeroBanner";
+export default function about() {
   return (
-    <section className="pt-28 pb-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          About Nmatrixpro
-        </h1>
-
-        <p className="text-gray-600 leading-relaxed mb-6">
-          Nmatrixpro is a modern online trading platform designed to empower
-          traders with advanced tools, transparent pricing, and global market
-          access.
-        </p>
-
-        <p className="text-gray-600 leading-relaxed">
-          Our mission is to provide a secure, fast, and user-friendly trading
-          environment for both beginners and professional traders.
-        </p>
-      </div>
-    </section>
+    <>
+      <HeroBanner
+        title="About"
+        description="NMATRIXPRO Pioneering Online Trading Since 2006
+We are one of the most secure brokers in the industry,
+with 9 regulations across 6 continents.
+We offer a wide choice of assets, leading platforms
+and generous trading conditions."
+        ctaText="Join NMATRIXPRO"
+        ctaLink="/register"
+        backgroundImage={bgForex}
+        // sideImage={phoneForex}
+      />
+      <ValuesVisionSection
+        valuesTitle="Our Values"
+        values={[
+          {
+            icon: ShieldCheck,
+            smallTitle: "Integrity and",
+            mainTitle: "Fairness",
+          },
+          {
+            icon: UserCheck,
+            smallTitle: "Customer Service",
+            mainTitle: "Above All Else",
+          },
+          {
+            icon: RefreshCw,
+            smallTitle: "Ongoing",
+            mainTitle: "Self-Improvement",
+          },
+          {
+            icon: BarChart3,
+            smallTitle: "Constant",
+            mainTitle: "Innovation",
+          },
+        ]}
+        visionTitle="Our Vision"
+        visionText="We are committed to empowering people to invest and trade with confidence, in an innovative and reliable environment; supported by best-in-class personal service and uncompromising integrity."
+        visionImage={visionImg}
+        cta={{
+          text: "Register Now",
+          link: "/register",
+        }}
+      />
+    </>
   );
 }
