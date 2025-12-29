@@ -3,23 +3,62 @@ import MobilePlatformsSection from "../common/MobilePlatformsSection";
 import TradingPlatformsGrid from "../common/TradingPlatformsGrid";
 import GlobalRegulationSection from "../common/GlobalRegulationSection";
 import TradingStartsHereSection from "../common/TradingStartsHereSection";
+import TradingConditionsSection from "../common/TradingStartsHereSection";
+import WhatMakesUsDifferentSection from "../common/WhatMakesUsDifferentSection";
+
+import mobilePlatformsImg from "../../assets/nmatrix1.png";
+import nmatrixhome from "../../assets/nmatrixhome.png";
+import nmatrix2 from "../../assets/nmatrix2.png";
+import nmatrix3 from "../../assets/nmatrix3.png";
 
 export default function Home() {
+  const platformItems = [
+    {
+      title: "WebTrader",
+      description: "A sleek, easy to use desktop trading platform",
+      // image: webTraderImg,
+      span: "large",
+    },
+    {
+      title: "MetaTrader 4",
+      description: "No.1 trading platform",
+      // image: mt4Img,
+    },
+    {
+      title: "MetaTrader 5",
+      description: "Advanced trading across 250 assets",
+      // image: mt5Img,
+    },
+    {
+      title: "DupliTrade™",
+      description: "Automated trading made simple",
+      // image: dupliTradeImg,
+    },
+    {
+      title: "AvaOptions",
+      description: "Balance risk and reward to match your market view",
+      // image: avaOptionsImg,
+      span: "full",
+    },
+  ];
+
   return (
     <>
       {/* HERO */}
       <HeroTradingSection
+        backgroundImage={nmatrixhome}
         title="A World-Class Trading Experience"
-        description="Step into global markets and trade with confidence across Stocks, Crypto, FX, Commodities, Indices and more."
+        description="Step into global markets and trade with confidence across Stocks, Crypto, FX, Commodities, Indices and more, with AvaTrade, a highly regulated multi-asset broker. What will you trade today?"
         primaryBtnText="Join NmatrixPro"
         secondaryBtnText="Free Demo"
-        note="Please note: markets will be closed for Christmas and New Year’s."
+        note="Please note: markets will be closed for Christmas
+        and New Year’s."
         tradeItems={[
-          { label: "EUR/USD", icon: "/icons/eurusd.png" },
-          { label: "Gold", icon: "/icons/gold.png" },
-          { label: "Tesla", icon: "/icons/tesla.png" },
-          { label: "Crude Oil", icon: "/icons/oil.png" },
-          { label: "BTC/USD", icon: "/icons/btc.png" },
+          { label: "EUR/USD" },
+          { label: "Gold" },
+          { label: "Tesla" },
+          { label: "Crude Oil" },
+          { label: "BTC/USD" },
         ]}
       />
 
@@ -28,7 +67,7 @@ export default function Home() {
         title="Powerful Mobile Platforms"
         highlight="You Can Trust"
         description="Enjoy a fully immersive trading experience across a range of powerful platforms tailored to all levels."
-        image="/images/mobile-platforms.png"
+        image={mobilePlatformsImg}
         platforms={[
           { title: "AvaTrade Mobile App" },
           {
@@ -46,35 +85,7 @@ export default function Home() {
       <TradingPlatformsGrid
         title="Endless Trading Opportunities Await"
         subtitle="Try our advanced platforms and never miss a trade!"
-        items={[
-          {
-            title: "WebTrader",
-            description: "A sleek, easy to use desktop trading platform",
-            image: "/images/webtrader.jpg",
-            large: true,
-          },
-          {
-            title: "MetaTrader 4",
-            description: "No.1 trading platform",
-            image: "/images/mt4.jpg",
-          },
-          {
-            title: "MetaTrader 5",
-            description: "Advanced trading across 250 assets",
-            image: "/images/mt5.jpg",
-          },
-          {
-            title: "DupliTrade™",
-            description: "Automated trading made simple",
-            image: "/images/duplitrade.jpg",
-          },
-          {
-            title: "AvaOptions",
-            description: "Balance risk and reward to match your market view",
-            image: "/images/avaoptions.jpg",
-            large: true,
-          },
-        ]}
+        items={platformItems}
       />
 
       {/* GLOBAL REGULATION SECTION */}
@@ -82,7 +93,7 @@ export default function Home() {
         title="You're in Safe Hands"
         description="NmatrixPro is regulated across multiple jurisdictions, with a wide global corporate presence."
         ctaText="Register Now"
-        globeImage="/images/world-map.png"
+        globeImage={nmatrix2}
         regulators={[
           {
             short: "FSA",
@@ -134,23 +145,56 @@ export default function Home() {
           {
             title: "Trading Academy",
             description:
-              "Learn with Academy for clear, structured lessons. Easy steps to build trading skills. No experience needed.",
+              "Learn with AvaAcademy for clear, structured lessons. Easy steps to build trading skills. No experience needed.",
+            link: "#",
             linkText: "Explore Courses",
-            link: "/academy",
           },
           {
             title: "Education Section",
             description:
               "Read articles and watch tutorials that cover every trading aspect. All topics, all levels, all in one click.",
+            link: "#",
             linkText: "Browse All Topics",
-            link: "/education",
           },
           {
             title: "Live Webinars",
             description:
-              "Attend our weekly live webinars to analyse trends and improve your trading skills in real time.",
+              "Attend our weekly live webinars to analyse trends. Improve your trading skills, in simple and understandable terms.",
+            link: "#",
             linkText: "Reserve Your Spot",
-            link: "/webinars",
+          },
+        ]}
+      />
+
+      <WhatMakesUsDifferentSection
+        title="What Makes AvaTrade Different?"
+        subtitle="Join Over 1 Million Returning Clients who already made the right choice"
+        image={nmatrix3}
+        features={[
+          {
+            title: "We Want You to Succeed",
+            description:
+              "From developing the best educational materials out there, to providing daily market analysis updates and live webinars, we are as interested in your success as you are.",
+          },
+          {
+            title: "We Believe in Endless Possibilities",
+            description:
+              "Access the world’s most popular instruments, ranging from forex pairs to CFDs on stocks, indices, commodities and cryptocurrencies – all at the palm of your hand.",
+          },
+          {
+            title: "Great Trading Conditions",
+            description:
+              "Hedging is allowed, without any restrictions on short selling and scalping. We provide fast and reliable order execution, as well as ultra-low spreads.",
+          },
+          {
+            title: "We Believe You Deserve The Best",
+            description:
+              "Take advantage of our Expert Advisors, Copy Trading platforms and 24/7 crypto trading. Try our unique risk management tool AvaProtect™, or utilise the Trading Central automated analysis add-on.",
+          },
+          {
+            title: "We Love to Stay in Touch!",
+            description:
+              "Stay up-to-date on the latest market news, promotions and offers! Blog, Twitter, Facebook page, YouTube channel.",
           },
         ]}
       />

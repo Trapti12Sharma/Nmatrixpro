@@ -35,8 +35,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* LOGO */}
-          <Link to="/" className="text-2xl font-bold text-black">
-            NMATRIXPRO
+          <Link to="/" className="flex items-center">
+            <img
+              src="/Nmatrix-logo.jpeg"
+              alt="NMATRIXPRO"
+              className="h-15 w-auto object-contain"
+            />
           </Link>
 
           {/* DESKTOP NAV */}
