@@ -10,35 +10,40 @@ import mobilePlatformsImg from "../../assets/nmatrix1.png";
 import nmatrixhome from "../../assets/nmatrixhome.png";
 import nmatrix2 from "../../assets/nmatrix2.png";
 import nmatrix3 from "../../assets/nmatrix3.png";
+import nmatrix4 from "../../assets/nmatrix4.png";
+import nmatrix5 from "../../assets/nmatrix5.png";
+import nmatrix6 from "../../assets/nmatrix6.png";
+import nmatrix7 from "../../assets/nmatrix7.png";
+import nmatrix8 from "../../assets/nmatrix8.png";
 
 export default function Home() {
   const platformItems = [
     {
       title: "WebTrader",
       description: "A sleek, easy to use desktop trading platform",
-      // image: webTraderImg,
       span: "large",
+      image: nmatrix4,
     },
     {
       title: "MetaTrader 4",
       description: "No.1 trading platform",
-      // image: mt4Img,
+      image: nmatrix5,
     },
     {
       title: "MetaTrader 5",
       description: "Advanced trading across 250 assets",
-      // image: mt5Img,
+      image: nmatrix6,
     },
     {
       title: "DupliTrade™",
       description: "Automated trading made simple",
-      // image: dupliTradeImg,
+      image: nmatrix7,
     },
     {
       title: "AvaOptions",
       description: "Balance risk and reward to match your market view",
-      // image: avaOptionsImg,
       span: "full",
+      image: nmatrix8,
     },
   ];
 
