@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import SimplePage from "./components/common/SimplePage";
 
 /* ===================== HOME ===================== */
 import Home from "./components/pages/Home";
@@ -179,8 +180,27 @@ export default function App() {
         <Route path="/trading-platforms/ava-social" element={<AvaSocial />} />
         <Route path="/trading-platforms/duplitrade" element={<DupliTrade />} />
 
-        <Route path="/about" element={<About />} />
-        <Route path="/trading-info" element={<TradingInfo />} />
+        {/* ================= ACCOUNT TYPES ================= */}
+        <Route path="/accounts/:type" element={<SimplePage />} />
+
+        {/* ================= TRADING TOOLS ================= */}
+        <Route path="/tools/:tool" element={<SimplePage />} />
+
+        {/* ================= FUNDS ================= */}
+        <Route path="/funds/:action" element={<SimplePage />} />
+
+        {/* ================= BENEFITS ================= */}
+        <Route path="/benefits/:type" element={<SimplePage />} />
+
+        {/* ================= IB PROGRAM ================= */}
+        <Route path="/ib/:section" element={<SimplePage />} />
+
+        {/* ================= SUPPORT ================= */}
+        <Route path="/support/:section" element={<SimplePage />} />
+        <Route path="/contact" element={<SimplePage />} />
+        <Route path="/feedback" element={<SimplePage />} />
+        <Route path="/download-app" element={<SimplePage />} />
+        <Route path="/blogs" element={<SimplePage />} />
       </Routes>
 
       <Footer />

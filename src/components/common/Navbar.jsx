@@ -2,6 +2,49 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 
+function NavMenu({ title, children }) {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      {/* TOP NAV ITEM */}
+      <span className="px-4 h-20 flex items-center cursor-pointer whitespace-nowrap text-gray-800 hover:text-blue-600 transition">
+        {title}
+      </span>
+
+      {/* FULL WIDTH DROPDOWN */}
+      {open && (
+        <div
+          ref={menuRef}
+          className="fixed left-0 top-20 w-screen bg-white border-t shadow-lg z-[9998]"
+        >
+          <div className="max-w-7xl mx-auto px-10 py-10">
+            <div className="grid grid-cols-5 gap-14 text-sm">{children}</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NavLink({ to, children }) {
+  return (
+    <li>
+      <Link
+        to={to}
+        className="block px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 whitespace-nowrap"
+      >
+        {children}
+      </Link>
+    </li>
+  );
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null); // "products" | "platforms"
@@ -44,13 +87,13 @@ export default function Navbar() {
           </Link>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <nav className="hidden lg:flex items-center h-20 gap-2 text-sm font-medium">
             {/* ================= PRODUCTS ================= */}
             <div
               className="relative"
               onMouseEnter={() => setActiveMenu("products")}
             >
-              <span className="px-4 py-3 cursor-pointer text-blue-600">
+              <span className="px-4 h-20 flex items-center cursor-pointer whitespace-nowrap text-blue-600">
                 Products
               </span>
 
@@ -175,7 +218,7 @@ export default function Navbar() {
               className="relative"
               onMouseEnter={() => setActiveMenu("platforms")}
             >
-              <span className="px-4 py-3 cursor-pointer hover:text-blue-600">
+              <span className="px-4 h-20 flex items-center cursor-pointer whitespace-nowrap hover:text-blue-600">
                 Trading Platforms
               </span>
 
@@ -282,8 +325,65 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link to="/trading-info">Trading Info</Link>
-            <Link to="/about">About</Link>
+            {/* ================= ACCOUNT TYPES ================= */}
+            <NavMenu title="Account Types">
+              <div>
+                <p className="font-semibold mb-4">Accounts</p>
+                <ul className="space-y-3 text-gray-600">
+                  <NavLink to="/accounts/standard">Standard Account</NavLink>
+                  <NavLink to="/accounts/micro">Micro Account</NavLink>
+                  <NavLink to="/accounts/vip">VIP Account</NavLink>
+                  <NavLink to="/accounts/live">Live Account</NavLink>
+                  <NavLink to="/accounts/demo">Demo Account</NavLink>
+                  <NavLink to="/accounts/topups">Topups</NavLink>
+                </ul>
+              </div>
+            </NavMenu>
+
+            {/* ================= TRADING TOOLS ================= */}
+            <NavMenu title="Trading Tools">
+              <div>
+                <p className="font-semibold mb-4">Tools</p>
+                <ul className="space-y-3 text-gray-600">
+                  <NavLink to="/tools/advanced-charts">Advanced Charts</NavLink>
+                  <NavLink to="/tools/copy-trading">Copy Trading</NavLink>
+                  <NavLink to="/tools/mam">MAM</NavLink>
+                  <NavLink to="/tools/pamm">PAMM</NavLink>
+                </ul>
+              </div>
+            </NavMenu>
+
+            {/* ================= FUNDS MANAGEMENT ================= */}
+            <NavMenu title="Funds Management">
+              <div>
+                <p className="font-semibold mb-4">Funds</p>
+                <ul className="space-y-3 text-gray-600">
+                  <NavLink to="/funds/deposit">Deposit</NavLink>
+                  <NavLink to="/funds/withdrawal">Withdrawal</NavLink>
+                  <NavLink to="/funds/internal-transfer">
+                    Internal Transfer
+                  </NavLink>
+                  <NavLink to="/funds/deposit-history">Deposit History</NavLink>
+                  <NavLink to="/funds/withdrawal-history">
+                    Withdrawal History
+                  </NavLink>
+                </ul>
+              </div>
+            </NavMenu>
+
+            {/* ================= SUPPORT & LEARN ================= */}
+            <NavMenu title="Support & Learn">
+              <div>
+                <p className="font-semibold mb-4">Support</p>
+                <ul className="space-y-3 text-gray-600">
+                  <NavLink to="/support/helpdesk">Helpdesk</NavLink>
+                  <NavLink to="/contact">Contact Us</NavLink>
+                  <NavLink to="/feedback">Leave a Feedback</NavLink>
+                  <NavLink to="/download-app">Download App</NavLink>
+                  <NavLink to="/blogs">Blogs</NavLink>
+                </ul>
+              </div>
+            </NavMenu>
           </nav>
 
           {/* RIGHT */}
